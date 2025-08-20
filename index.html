@@ -2,51 +2,56 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>System Breach</title>
+  <title>DoD Secure Terminal</title>
   <style>
     body {
       background: black;
-      color: red;
+      color: #00ff00;
       font-family: monospace;
-      height: 100vh;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      overflow: hidden;
+      font-size: 1.1rem;
+      padding: 20px;
     }
     #terminal {
-      font-size: 1.2rem;
-      text-shadow: 0 0 5px red, 0 0 10px darkred;
       white-space: pre-line;
+      line-height: 1.4em;
+      text-shadow: 0 0 5px #00ff00, 0 0 10px #008000;
     }
-    .glitch {
-      font-size: 3rem;
-      font-weight: bold;
-      color: red;
-      text-shadow: 0 0 5px red, 0 0 20px darkred, 0 0 40px red;
-      animation: flicker 0.2s infinite;
+    .header {
+      border-bottom: 1px solid #00ff00;
+      padding-bottom: 10px;
       margin-bottom: 20px;
+      font-weight: bold;
+      font-size: 1.3rem;
     }
-    @keyframes flicker {
-      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
-      20%, 22%, 24%, 55% { opacity: 0; }
+    .blink {
+      animation: blink 1s step-start infinite;
+    }
+    @keyframes blink {
+      50% { opacity: 0; }
     }
   </style>
 </head>
 <body>
-  <div class="glitch">⚠ SYSTEM BREACH DETECTED ⚠</div>
+  <div class="header">
+    [ DEPARTMENT OF DEFENSE – CYBER OPERATIONS DIVISION ]<br>
+    Unauthorized Access Detected :: Terminal Session Initiated
+  </div>
   <div id="terminal"></div>
 
   <script>
     const lines = [
-      "Initializing trace...",
-      "IP address detected...",
-      "Accessing device storage...",
-      "Warning: Unauthorized activity logged.",
+      "> Establishing secure connection...",
+      "> Connection routed through PENTAGON mainframe [OK]",
+      "> Initiating user trace...",
+      "> IP Address: 192.168.54.22",
+      "> Location: East Coast, United States",
+      "> GPS Coordinates: 40.7128° N, 74.0060° W",
+      "> Accessing device storage...",
+      "> Scanning photo & video files...",
+      "> ALERT: Unauthorized surveillance detected",
+      "> Logging identity with DoD Cyber Command...",
       "",
-      "RELAX. This is a joke.",
+      ">>> RELAX. This is a joke. <<<",
       "Next time, ask for consent before recording."
     ];
 
@@ -55,11 +60,12 @@
       if (i < lines.length) {
         document.getElementById("terminal").innerHTML += lines[i] + "\n";
         i++;
-        setTimeout(typeLine, 1500);
+        setTimeout(typeLine, 1200);
+      } else {
+        document.getElementById("terminal").innerHTML += "\n> Session terminated <span class='blink'>█</span>";
       }
     }
     typeLine();
   </script>
 </body>
 </html>
-
